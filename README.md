@@ -1,13 +1,9 @@
 <!-- # Moment-Guided Graph Sampling (MGGS) -->
-<h1>
-  <img src="assets/logo.png" width="65" align="center">
-  Moment-Guided Graph Sampling (MGGS)
-</h1>
+<h1><img src="assets/logo.png" width="65" alt="MGGS logo" align="middle">&nbsp; Moment-Guided Graph Sampling (MGGS)</h1>
 
 
 
-<!-- > Official implementation of the arXiv preprint [*Moments-Guided Edge Sampling*](<arxiv-url>).
- -->
+
 
 *How can we quantify and control the effect of a **local edge edit**—an addition or deletion—on **global graph structure**?* We characterize each edit by its **moment change**, which measures how it alters length-$k$ closed walks, and use this signal to guide graph sampling.
 
@@ -30,9 +26,9 @@
 
 ## Method overview
 
-Spectral moments summarize global structure through closed random walks. For a graph $G$ with $n$ nodes and random-walk transition matrix $P$, the $k$-th moment is $m_k(G)=\frac{1}{n}\mathrm{Tr}(P^k)$. Let $\mathcal{K}=\{k_1,\ldots,k_p\}$ be the selected orders, $\mathbf{m}=(m_k)_{k\in\mathcal{K}}$ the current moment profile, and $\mathbf{m}^{*}=(m_k^{*})_{k\in\mathcal{K}}$ the target profile.
+Spectral moments summarize global structure through closed random walks. For a graph $G$ with $n$ nodes and random-walk transition matrix $P$, the $k$-th moment is $m_k(G)=\frac{1}{n}\mathrm{Tr}(P^k)$. Let $\mathcal{K}=\{k_1,\ldots,k_p\}$ be the selected orders, $\mathbf{m}=(m_k)_{k\in\mathcal{K}}$ the current moment profile, and $\mathbf{m}^{\ast}=(m_k^{\ast})_{k\in\mathcal{K}}$ the target profile.
 
-MGGS edits edges to move $\mathbf{m}$ toward $\mathbf{m}^{*}$. An edit is written as $\epsilon=(o,u,v)$, where $o\in\{\mathrm{ADD},\mathrm{DELETE}\}$ specifies whether edge $(u,v)$ is added or removed. Let $G^{\epsilon}$ be the edited graph and $P^{\epsilon}$ its random-walk transition matrix. The resulting change in the $k$-th moment is
+MGGS edits edges to move $\mathbf{m}$ toward $\mathbf{m}^{\ast}$. An edit is written as $\epsilon=(o,u,v)$, where $o\in\{\mathrm{ADD},\mathrm{DELETE}\}$ specifies whether edge $(u,v)$ is added or removed. Let $G^{\epsilon}$ be the edited graph and $P^{\epsilon}$ its random-walk transition matrix. The resulting change in the $k$-th moment is
 
 $$
 \Delta m_k(\epsilon)=m_k(G^{\epsilon})-m_k(G)
@@ -46,18 +42,18 @@ For each candidate edit $\epsilon$, the predicted profile is $\mathbf{m}+\Delta\
 $$
 \mathrm{score}(\epsilon)
 =\sum_{k\in\mathcal{K}}
-\left(\frac{m_k+\Delta m_k(\epsilon)-m_k^{*}}{\sigma_k}\right)^2,
+\left(\frac{m_k+\Delta m_k(\epsilon)-m_k^{\ast}}{\sigma_k}\right)^2,
 \qquad \sigma_k=m_k(G).
 $$
 
 At step $t$, it selects the best candidate from the current set $\mathcal{C}_t$,
 
 $$
-\epsilon_t^{*}=\underset{\epsilon\in\mathcal{C}_t}{\arg\min}\;
+\epsilon_t^{\ast}=\underset{\epsilon\in\mathcal{C}_t}{\arg\min}\;
 \mathrm{score}(\epsilon),
 $$
 
-applies the edit, updates $\mathbf{m}\leftarrow\mathbf{m}+\Delta\mathbf{m}(\epsilon_t^{*})$, and repeats until the edit budget is reached. Candidates may contain edge additions, deletions, or both.
+applies the edit, updates $\mathbf{m}\leftarrow\mathbf{m}+\Delta\mathbf{m}(\epsilon_t^{\ast})$, and repeats until the edit budget is reached. Candidates may contain edge additions, deletions, or both.
 
 **Lazy top-k rescoring.** Applying one edit can change another candidate's $\Delta m_k(\epsilon)$, but this interaction is controlled by locality and admits a bound: nearby edges are affected most, while many cached scores remain unchanged or change only slightly. MGGS therefore caches all scores once and, after each edit, exactly recomputes only the $K_{\mathrm{top}}$ candidates with the lowest cached scores. It selects the best refreshed candidate and leaves the remaining scores cached for later steps. This approximate strategy reduces per-step rescoring from all $m$ candidates to only $K_{\mathrm{top}}\ll m$.
 
