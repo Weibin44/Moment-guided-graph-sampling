@@ -1,6 +1,6 @@
 <!-- # Moment-Guided Graph Sampling (MGGS) -->
 <h1>
-  <img src="assets/logo.png" width="80" align="center">
+  <img src="assets/logo.png" width="70" align="center">
   Moment-Guided Graph Sampling (MGGS)
 </h1>
 
@@ -30,13 +30,13 @@
 
 ## Method overview
 
-Spectral moments summarize global structure through closed random walks. For a graph $G$ with $n$ nodes and random-walk transition matrix $P$, the $k$-th moment is $m_k(G)=\frac{1}{n}\operatorname{Tr}(P^k)$. Let $\mathcal{K}=\{k_1,\ldots,k_p\}$ be the selected orders, $\mathbf{m}=(m_k)_{k\in\mathcal{K}}$ the current moment profile, and $\mathbf{m}^{*}=(m_k^{*})_{k\in\mathcal{K}}$ the target profile.
+Spectral moments summarize global structure through closed random walks. For a graph $G$ with $n$ nodes and random-walk transition matrix $P$, the $k$-th moment is $m_k(G)=\frac{1}{n}\mathrm{Tr}(P^k)$. Let $\mathcal{K}=\{k_1,\ldots,k_p\}$ be the selected orders, $\mathbf{m}=(m_k)_{k\in\mathcal{K}}$ the current moment profile, and $\mathbf{m}^{*}=(m_k^{*})_{k\in\mathcal{K}}$ the target profile.
 
 MGGS edits edges to move $\mathbf{m}$ toward $\mathbf{m}^{*}$. An edit is written as $\epsilon=(o,u,v)$, where $o\in\{\mathrm{ADD},\mathrm{DELETE}\}$ specifies whether edge $(u,v)$ is added or removed. Let $G^{\epsilon}$ be the edited graph and $P^{\epsilon}$ its random-walk transition matrix. The resulting change in the $k$-th moment is
 
 $$
 \Delta m_k(\epsilon)=m_k(G^{\epsilon})-m_k(G)
-=\frac{1}{n}\left[\operatorname{Tr}\!\left((P^{\epsilon})^k\right)-\operatorname{Tr}\!\left(P^k\right)\right].
+=\frac{1}{n}\left[\mathrm{Tr}\!\left((P^{\epsilon})^k\right)-\mathrm{Tr}\!\left(P^k\right)\right].
 $$
 
 These changes describe how one local edit moves the graph in moment space. MGGS computes them exactly using two complementary approaches: the **combinatorial/topology method** tracks affected local closed walks and gives $O(1)$ closed-form updates for low-order moments, while the **low-rank method** exploits locality and cyclic trace invariance to support arbitrary orders and batched edits. For a single-edge edit, the low-rank method reduces the cost from $O(kmn)$ with direct recomputation to $O(km)$, where $m$ is the number of edges.
@@ -44,7 +44,7 @@ These changes describe how one local edit moves the graph in moment space. MGGS 
 For each candidate edit $\epsilon$, the predicted profile is $\mathbf{m}+\Delta\mathbf{m}(\epsilon)$. MGGS scores its normalized distance to the target:
 
 $$
-\operatorname{score}(\epsilon)
+\mathrm{score}(\epsilon)
 =\sum_{k\in\mathcal{K}}
 \left(\frac{m_k+\Delta m_k(\epsilon)-m_k^{*}}{\sigma_k}\right)^2,
 \qquad \sigma_k=m_k(G).
@@ -54,7 +54,7 @@ At step $t$, it selects the best candidate from the current set $\mathcal{C}_t$,
 
 $$
 \epsilon_t^{*}=\underset{\epsilon\in\mathcal{C}_t}{\arg\min}\;
-\operatorname{score}(\epsilon),
+\mathrm{score}(\epsilon),
 $$
 
 applies the edit, updates $\mathbf{m}\leftarrow\mathbf{m}+\Delta\mathbf{m}(\epsilon_t^{*})$, and repeats until the edit budget is reached. Candidates may contain edge additions, deletions, or both.
