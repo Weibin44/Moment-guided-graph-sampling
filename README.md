@@ -2,10 +2,11 @@
 <h1><img src="assets/logo.png" width="80" alt="MGGS logo" align="absmiddle">&nbsp; Moment-Guided Graph Sampling (MGGS)</h1>
 
 
+> Official implementation of the arXiv preprint [*Moments-Guided Edge Sampling*](<arxiv-url>).
 
 
 
-*How can we quantify and control the effect of a **local edge edit**—an addition or deletion—on **global graph structure**?* We characterize each edit by its **moment change**, which measures how it alters length-$k$ closed walks, and use this signal to guide graph sampling.
+*How can we quantify and control the effect of a **local edge edit**—an addition or deletion—on **global graph structure**?* We characterize each edit by its **moment change**, which measures how it alters closed walks of length *k*, and use this signal to guide graph sampling.
 
 
 <p align="center">
@@ -91,7 +92,7 @@ Perturbing different types of edges has different effects on supervised node cla
 ## 1. Download
 
 ```bash
-git clone '<repository-url>' mggs
+git clone https://github.com/Weibin44/Moment-guided-graph-sampling.git mggs
 cd mggs
 conda env create -f environment.yml
 conda activate mggs
