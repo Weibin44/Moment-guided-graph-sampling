@@ -1,5 +1,5 @@
 <!-- # Moment-Guided Graph Sampling (MGGS) -->
-<h1><img src="assets/logo.png" width="65" alt="MGGS logo" align="middle">&nbsp; Moment-Guided Graph Sampling (MGGS)</h1>
+<h1><img src="assets/logo.png" width="80" alt="MGGS logo" align="middle">&nbsp; Moment-Guided Graph Sampling (MGGS)</h1>
 
 
 
@@ -26,9 +26,9 @@
 
 ## Method overview
 
-Spectral moments summarize global structure through closed random walks. For a graph $G$ with $n$ nodes and random-walk transition matrix $P$, the $k$-th moment is $m_k(G)=\frac{1}{n}\mathrm{Tr}(P^k)$. Let $\mathcal{K}=\{k_1,\ldots,k_p\}$ be the selected orders, $\mathbf{m}=(m_k)_{k\in\mathcal{K}}$ the current moment profile, and $\mathbf{m}^{\ast}=(m_k^{\ast})_{k\in\mathcal{K}}$ the target profile.
+Spectral moments summarize global structure through closed random walks. For a graph $G$ with $n$ nodes and random-walk transition matrix $P$, the $k$-th moment is $m_k(G)=\frac{1}{n}\mathrm{Tr}(P^k)$. Let $\mathcal{K}=\{k_1,\ldots,k_p\}$ be the selected orders, $`\mathbf{m}=(m_k)_{k\in\mathcal{K}}`$ the current moment profile, and $`\mathbf{m}^{\ast}=(m_k^{\ast})_{k\in\mathcal{K}}`$ the target profile.
 
-MGGS edits edges to move $\mathbf{m}$ toward $\mathbf{m}^{\ast}$. An edit is written as $\epsilon=(o,u,v)$, where $o\in\{\mathrm{ADD},\mathrm{DELETE}\}$ specifies whether edge $(u,v)$ is added or removed. Let $G^{\epsilon}$ be the edited graph and $P^{\epsilon}$ its random-walk transition matrix. The resulting change in the $k$-th moment is
+MGGS edits edges to move $\mathbf{m}$ toward $\mathbf{m}^{\ast}$. An edit is written as $\epsilon=(o,u,v)$, where $`o\in\left\{\mathrm{ADD},\mathrm{DELETE}\right\}`$ specifies whether edge $(u,v)$ is added or removed. Let $G^{\epsilon}$ be the edited graph and $P^{\epsilon}$ its random-walk transition matrix. The resulting change in the $k$-th moment is
 
 $$
 \Delta m_k(\epsilon)=m_k(G^{\epsilon})-m_k(G)
