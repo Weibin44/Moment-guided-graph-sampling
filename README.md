@@ -1,5 +1,5 @@
 <!-- # Moment-Guided Graph Sampling (MGGS) -->
-<h1><img src="assets/logo.png" width="80" alt="MGGS logo" align="middle">&nbsp; Moment-Guided Graph Sampling (MGGS)</h1>
+<h1><img src="assets/logo.png" width="80" alt="MGGS logo" align="absmiddle">&nbsp; Moment-Guided Graph Sampling (MGGS)</h1>
 
 
 
