@@ -33,7 +33,7 @@ MGGS edits edges to move $\mathbf{m}$ toward $\mathbf{m}^{\ast}$. An edit is wri
 
 $$
 \Delta m_k(\epsilon)=m_k(G^{\epsilon})-m_k(G)
-=\frac{1}{n}\left[\mathrm{Tr}\!\left((P^{\epsilon})^k\right)-\mathrm{Tr}\!\left(P^k\right)\right].
+=\frac{1}{n}\left[\mathrm{Tr}\left((P^{\epsilon})^k\right)-\mathrm{Tr}\left(P^k\right)\right].
 $$
 
 These changes describe how one local edit moves the graph in moment space. MGGS computes them exactly using two complementary approaches: the **combinatorial/topology method** tracks affected local closed walks and gives $O(1)$ closed-form updates for low-order moments, while the **low-rank method** exploits locality and cyclic trace invariance to support arbitrary orders and batched edits. For a single-edge edit, the low-rank method reduces the cost from $O(kmn)$ with direct recomputation to $O(km)$, where $m$ is the number of edges.
@@ -50,7 +50,7 @@ $$
 At step $t$, it selects the best candidate from the current set $\mathcal{C}_t$,
 
 $$
-\epsilon_t^{\ast}=\underset{\epsilon\in\mathcal{C}_t}{\arg\min}\;
+\epsilon_t^{\ast}=\underset{\epsilon\in\mathcal{C}_t}{\arg\min}
 \mathrm{score}(\epsilon),
 $$
 
