@@ -1,0 +1,20 @@
+name: mggs
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.9
+  - numpy=1.26
+  - scipy=1.13
+  - pytorch=1.13
+  - pip
+  - pip:
+      - matplotlib==3.9.2
+      - networkx==3.2.1
+      - numba==0.60.0
+      - scikit-learn==1.5.2
+      - torch-geometric==2.5.0
+      - tqdm
+      # Install torch-scatter/torch-sparse wheels matching PyTorch/CUDA
+      # from https://data.pyg.org/whl/.
+

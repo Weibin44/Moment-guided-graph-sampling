@@ -1,0 +1,2 @@
+"""Small MGGS usage examples."""
+

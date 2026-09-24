@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mggs"
+version = "0.1.0"
+description = "Exact delta moments and moment-guided graph sampling"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "torch>=1.13",
+  "torch-geometric>=2.3",
+]
+
+[project.optional-dependencies]
+fast = ["numba>=0.57"]
+experiments = [
+  "matplotlib>=3.7",
+  "networkx>=3.0",
+  "scikit-learn>=1.2",
+  "threadpoolctl>=3.0",
+  "tqdm>=4.65",
+]
+test = ["pytest>=7"]
+
+[project.scripts]
+mggs = "mggs.cli:main"
+mggs-edge-density = "experiments.EXP1_edge_direction_density:main"
+mggs-sampling-efficiency = "experiments.sampling_efficiency:main"
+mggs-property-benchmark = "experiments.EXP2_graph_property_preservation:main"
+mggs-supervised = "experiments.EXP3_graph_learning.supervised_node_classification.EXP3_supervised_edge_direction:main"
+
+[tool.setuptools.packages.find]
+include = ["mggs*", "experiments*"]
